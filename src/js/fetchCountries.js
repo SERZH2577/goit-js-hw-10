@@ -1,6 +1,6 @@
 const BASE_URL = 'https://restcountries.com';
 
-export function fetchCountries(name) {
+export const fetchCountries = name => {
   return fetch(`${BASE_URL}/v3.1/name/${name}?fields=name,capital,flags,population,languages`)
     .then(res => {
       if (!res.ok) {
@@ -8,11 +8,11 @@ export function fetchCountries(name) {
         renderCountryInfo(incorrectInput);
         Notiflix.Notify.failure('Oops, there is no country with that name');
 
-        throw res;
+        throw res();
       }
       return res.json();
     })
     .then(res => {
       return res;
     });
-}
+};
